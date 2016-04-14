@@ -1,5 +1,11 @@
 INCLUDE 'emu8086.inc'  
 
+    org 100h    
+    
+    
+    
+
+
 
 
  
@@ -14,36 +20,7 @@ PUTC 10
 CALL scan_num
 
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+   
  
 
 mov ax,0600h   
@@ -383,9 +360,70 @@ jnz pthRT
 
 
 
+; asfalt sus
+mov cx,1
+mov dx,176
+AS: mov ah,0ch
+mov al,07h
+int 10h
+inc cx
+cmp cx,316
+jnz AS  
 
 
 
+     
+; asfalt jos
+mov cx,1
+mov dx,196
+ASB: mov ah,0ch
+mov al,07h
+int 10h
+inc cx
+cmp cx,316
+jnz ASB 
+         
+         
+
+;sunet
+
+
+
+MOV     DX,5          
+
+MOV     BX,1            
+
+MOV     AL, 10110110B    
+OUT     43H, AL          
+
+NEXT_FREQUENCY:          
+
+MOV     AX, BX           
+
+OUT     42H, AL          
+MOV     AL, AH           
+OUT     42H, AL         
+
+IN      AL, 61H          
+OR      AL, 00000011B    
+OUT     61H, AL         
+                        
+
+MOV     CX, 100          
+DELAY_LOOP:              
+LOOP    DELAY_LOOP       
+
+INC     BX              
+                         
+
+DEC     DX               
+
+CMP     DX, 0            
+JNZ     NEXT_FREQUENCY   
+
+IN      AL,61H           
+AND     AL,11111100B     
+OUT     61H,AL           
 
 
 
